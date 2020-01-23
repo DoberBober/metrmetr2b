@@ -70,9 +70,6 @@ class House(models.Model):
 	company = models.ForeignKey(Company, related_name='house_owner', null=True, on_delete=models.SET_NULL, verbose_name="Строительная компания")
 	completion = models.IntegerField(verbose_name="Год завершения строительства")
 	stage = models.ForeignKey(Stage, related_name='house_stage', null=True, on_delete=models.SET_NULL, verbose_name="Этап строительства")
-	price = models.IntegerField(verbose_name="Стоимость квадратного метра")
-	cost = models.IntegerField(verbose_name="Цена квартиры")
-	square = models.IntegerField(verbose_name="Площадь")
 
 	def save(self, *args, **kwargs):
 		if not self.slug:
