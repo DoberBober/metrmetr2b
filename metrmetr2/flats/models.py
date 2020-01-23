@@ -66,10 +66,10 @@ class Stage(models.Model):
 class House(models.Model):
 	name = models.CharField(max_length=150, verbose_name="Название ЖК")
 	slug = models.SlugField(max_length=150, unique=True, blank=True)
-	district = models.ForeignKey(District, related_name='house_district', null=True, blank=True, on_delete=models.SET_NULL, verbose_name="Район")
-	company = models.ForeignKey(Company, related_name='house_owner', null=True, blank=True, on_delete=models.SET_NULL, verbose_name="Строительная компания")
+	district = models.ForeignKey(District, related_name='house_district', null=True, on_delete=models.SET_NULL, verbose_name="Район")
+	company = models.ForeignKey(Company, related_name='house_owner', null=True, on_delete=models.SET_NULL, verbose_name="Строительная компания")
 	completion = models.IntegerField(verbose_name="Год завершения строительства")
-	stage = models.ForeignKey(Stage, related_name='house_stage', null=True, blank=True, on_delete=models.SET_NULL, verbose_name="Этап строительства")
+	stage = models.ForeignKey(Stage, related_name='house_stage', null=True, on_delete=models.SET_NULL, verbose_name="Этап строительства")
 	price = models.IntegerField(verbose_name="Стоимость квадратного метра")
 	cost = models.IntegerField(verbose_name="Цена квартиры")
 	square = models.IntegerField(verbose_name="Площадь")
