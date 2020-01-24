@@ -85,3 +85,21 @@ class House(models.Model):
 		db_table = 'tbl_houses'
 		verbose_name = 'ЖК'
 		verbose_name_plural = 'ЖК'
+
+# Квартира.
+class Apartment(models.Model):
+	name = models.CharField(max_length=150, verbose_name="Название")
+	house = models.ForeignKey(House, related_name='apartment_house', null=True, on_delete=models.SET_NULL, verbose_name="ЖК")
+	rooms = models.IntegerField(verbose_name="Количество комнат")
+	price = models.IntegerField(verbose_name="Стоимость квадратного метра")
+	cost = models.IntegerField(verbose_name="Цена квартиры")
+	square = models.IntegerField(verbose_name="Площадь")
+
+	def __str__(self):
+		return self.name
+
+	class Meta:
+		ordering = ['name']
+		db_table = 'tbl_appartments'
+		verbose_name = 'Квартира'
+		verbose_name_plural = 'Квартиры'

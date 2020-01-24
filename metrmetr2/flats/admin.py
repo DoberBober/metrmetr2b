@@ -51,6 +51,21 @@ class StageAdmin(admin.ModelAdmin):
 
 admin.site.register(Stage, StageAdmin)
 
+# Квартиры.
+class ApartmentInline(admin.StackedInline):
+    model = Apartment
+    extra = 1
+    fieldsets = (
+        (None, {
+            'fields': (
+                'name',
+                'price',
+                'square',
+                'cost',
+            ),
+        }),
+    )
+
 # Дома.
 class HouseAdmin(admin.ModelAdmin):
 	search_fields = ['name']
@@ -69,5 +84,6 @@ class HouseAdmin(admin.ModelAdmin):
 	)
 
 	list_display = ['name', 'company', 'district', 'completion', 'stage']
+	inlines = [ApartmentInline]
 
 admin.site.register(House, HouseAdmin)
