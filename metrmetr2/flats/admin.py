@@ -58,7 +58,7 @@ class FloorInline(nested_admin.NestedStackedInline):
 	extra = 1
 	classes = ['collapse']
 	fieldsets = (
-		('Показать/скрыть этаж', {
+		('Этажи', {
 			# 'classes': ('collapse',),
 			'fields': (
 				('floor', 'price', 'cost',),
@@ -71,7 +71,7 @@ class ApartmentInline(nested_admin.NestedStackedInline):
 	model = Apartment
 	extra = 1
 	fieldsets = (
-		('Показать/скрыть квартиру', {
+		('Показать/скрыть параметры квартиры', {
 			'classes': ('collapse',),
 			'fields': (
 				'name', ('rooms', 'price'), ('square', 'cost'),
@@ -93,7 +93,7 @@ class HouseAdmin(nested_admin.NestedModelAdmin):
 		}),
 		(None, {
 			'fields': (
-				('district', ('completion', 'stage'))
+				(('district', 'address'), ('completion', 'stage'))
 			),
 		}),
 		(None, {
