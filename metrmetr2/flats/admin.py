@@ -1,4 +1,5 @@
 from django.contrib import admin
+import nested_admin
 
 from .models import *
 
@@ -51,34 +52,53 @@ class StageAdmin(admin.ModelAdmin):
 
 admin.site.register(Stage, StageAdmin)
 
+# Этажи.
+class FloorInline(nested_admin.NestedStackedInline):
+	model = Floor
+	extra = 1
+	classes = ['collapse']
+	fieldsets = (
+		('Показать/скрыть этаж', {
+			# 'classes': ('collapse',),
+			'fields': (
+				('floor', 'price', 'cost',),
+			),
+		}),
+	)
+
 # Квартиры.
-class ApartmentInline(admin.StackedInline):
-    model = Apartment
-    extra = 1
-    fieldsets = (
-        (None, {
-            'fields': (
-                'name',
-                'price',
-                'square',
-                'cost',
-            ),
-        }),
-    )
+class ApartmentInline(nested_admin.NestedStackedInline):
+	model = Apartment
+	extra = 1
+	fieldsets = (
+		('Показать/скрыть квартиру', {
+			'classes': ('collapse',),
+			'fields': (
+				'name', ('rooms', 'price'), ('square', 'cost'),
+			),
+		}),
+	)
+	
+	inlines = [FloorInline]
 
 # Дома.
-class HouseAdmin(admin.ModelAdmin):
+class HouseAdmin(nested_admin.NestedModelAdmin):
 	search_fields = ['name']
 
 	fieldsets = (
 		(None, {
 			'fields': (
-				('name', 'slug', 'company')
+				(('name', 'slug'), 'company')
 			),
 		}),
 		(None, {
 			'fields': (
-				('district', 'completion', 'stage')
+				('district', ('completion', 'stage'))
+			),
+		}),
+		(None, {
+			'fields': (
+				(('hirepurchase', 'mortgage', 'maternalcapital'),)
 			),
 		}),
 	)

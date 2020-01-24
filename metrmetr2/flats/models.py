@@ -70,6 +70,9 @@ class House(models.Model):
 	company = models.ForeignKey(Company, related_name='house_owner', null=True, on_delete=models.SET_NULL, verbose_name="Строительная компания")
 	completion = models.IntegerField(verbose_name="Год завершения строительства")
 	stage = models.ForeignKey(Stage, related_name='house_stage', null=True, on_delete=models.SET_NULL, verbose_name="Этап строительства")
+	hirepurchase = models.BooleanField(default=0, verbose_name='Рассрочка')
+	mortgage = models.BooleanField(default=0, verbose_name='Ипотека')
+	maternalcapital = models.BooleanField(default=0, verbose_name='Материнский капитал')
 
 	def save(self, *args, **kwargs):
 		if not self.slug:
@@ -100,6 +103,19 @@ class Apartment(models.Model):
 
 	class Meta:
 		ordering = ['name']
-		db_table = 'tbl_appartments'
+		db_table = 'tbl_apartments'
 		verbose_name = 'Квартира'
 		verbose_name_plural = 'Квартиры'
+
+# Этаж.
+class Floor(models.Model):
+	apartment = models.ForeignKey(Apartment, related_name='floor_apartment', null=True, on_delete=models.SET_NULL, verbose_name="Квартира")
+	floor = models.IntegerField(verbose_name="Этаж")
+	price = models.IntegerField(verbose_name="Стоимость квадратного метра", null=True, blank=True)
+	cost = models.IntegerField(verbose_name="Цена квартиры", null=True, blank=True)
+
+	class Meta:
+		ordering = ['apartment']
+		db_table = 'tbl_floors'
+		verbose_name = 'Этаж'
+		verbose_name_plural = 'Этажи'
