@@ -18,7 +18,9 @@ class AllApartmentsView(APIView):
 # Одна компания.
 class CompanyView(APIView):
 	def get(self, request, company_slug):
-		houses = House.objects.filter(company_id=company_slug)
+		company_id = Company.objects.get(slug__iexact=company_slug).id
+
+		houses = House.objects.filter(company_id=company_id)
 		houses_serialized = HousesSerializers(houses, many=True)
 
 		return Response(houses_serialized.data)
@@ -26,7 +28,10 @@ class CompanyView(APIView):
 # Один дом.
 class HouseView(APIView):
 	def get(self, request, company_slug, house_slug):
-		houses = House.objects.filter(id=house_slug, company_id=company_slug)
+		company_id = Company.objects.get(slug__iexact=company_slug).id
+		house_id = House.objects.get(slug__iexact=house_slug).id
+
+		houses = House.objects.filter(id=house_id, company_id=company_id)
 		houses_serialized = HousesSerializers(houses, many=True)
 
 		return Response(houses_serialized.data)
