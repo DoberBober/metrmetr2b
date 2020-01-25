@@ -103,7 +103,7 @@ class Apartment(models.Model):
 		return self.name
 
 	class Meta:
-		ordering = ['name']
+		ordering = ['rooms']
 		db_table = 'tbl_apartments'
 		verbose_name = 'Квартира'
 		verbose_name_plural = 'Квартиры'
@@ -119,7 +119,7 @@ class Floor(models.Model):
 		return "Этаж " + str(self.floor)
 
 	class Meta:
-		ordering = ['apartment']
+		ordering = ['floor']
 		db_table = 'tbl_floors'
 		verbose_name = 'Этаж'
 		verbose_name_plural = 'Этажи'
