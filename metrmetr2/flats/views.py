@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.db.models import Max
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -35,3 +36,23 @@ class HouseView(APIView):
 		houses_serialized = HousesSerializers(houses, many=True)
 
 		return Response(houses_serialized.data)
+
+# Фильтр.
+class FilterView(APIView):
+	def get(self, request):
+		maxPrice = Floor.objects.all().aggregate(Max('cost'))
+		rooms_info = Apartment.objects.values_list('rooms', flat=True).distinct()
+		stages = Stage.objects.all()
+		stages_serialized = StagesFilterSerializers(stages, many=True).data
+		districts = District.objects.all()
+		districts_serialized = DistrictsFilterSerializers(districts, many=True).data
+		houses = House.objects.all()
+		houses_serialized = HousesFilterSerializers(houses, many=True).data
+
+		return Response({
+			"maxPrice": maxPrice, 
+			"rooms": rooms_info, 
+			"stages": stages_serialized, 
+			"districts": districts_serialized, 
+			"houses": houses_serialized
+		})

@@ -25,3 +25,20 @@ class HousesSerializers(serializers.ModelSerializer):
 	class Meta:
 		model = House		
 		fields = ("id", "name", "slug", "address", "completion", "hirepurchase", "mortgage", "maternalcapital", "district", "company", "stage", "apartments")
+
+
+# Для фильтра.
+class StagesFilterSerializers(serializers.ModelSerializer):
+	class Meta:
+		model = Stage
+		fields = ("id", "name")
+
+class DistrictsFilterSerializers(serializers.ModelSerializer):
+	class Meta:
+		model = District
+		fields = ("id", "name")
+
+class HousesFilterSerializers(serializers.ModelSerializer):
+	class Meta:
+		model = House
+		fields = ("id", "name")
