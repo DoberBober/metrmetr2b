@@ -50,7 +50,7 @@ class FilterView(APIView):
 		houses_serialized = HousesFilterSerializers(houses, many=True).data
 
 		return Response({
-			"maxPrice": maxPrice, 
+			"maxPrice": maxPrice['cost__max'], 
 			"rooms": rooms_info, 
 			"stages": stages_serialized, 
 			"districts": districts_serialized, 
