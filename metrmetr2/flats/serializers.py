@@ -24,7 +24,7 @@ class HousesSerializers(serializers.ModelSerializer):
 	
 	class Meta:
 		model = House		
-		fields = ("id", "name", "slug", "address", "completion", "hirepurchase", "mortgage", "maternalcapital", "district", "company", "stage", "apartments")
+		fields = ("id", "name", "slug", "address", "completion", "hirepurchase", "mortgage", "maternalcapital", "phone", "district", "company", "stage", "apartments")
 
 
 # Для фильтра.
