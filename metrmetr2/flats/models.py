@@ -74,6 +74,7 @@ class House(models.Model):
 	hirepurchase = models.BooleanField(default=0, verbose_name='Рассрочка')
 	mortgage = models.BooleanField(default=0, verbose_name='Ипотека')
 	maternalcapital = models.BooleanField(default=0, verbose_name='Материнский капитал')
+	phone = models.CharField(max_length=20, blank=True, verbose_name="Телефон")
 
 	def save(self, *args, **kwargs):
 		if not self.slug:

@@ -101,6 +101,11 @@ class HouseAdmin(nested_admin.NestedModelAdmin):
 				(('hirepurchase', 'mortgage', 'maternalcapital'),)
 			),
 		}),
+		(None, {
+			'fields': (
+				('phone',)
+			),
+		}),
 	)
 
 	list_display = ['name', 'company', 'district', 'completion', 'stage']
