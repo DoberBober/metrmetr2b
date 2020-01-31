@@ -2,6 +2,7 @@ from django.contrib import admin
 import nested_admin
 
 from .models import *
+from .forms import HouseForm, ApartmentForm, FloorForm
 
 
 # Районы.
@@ -55,8 +56,9 @@ admin.site.register(Stage, StageAdmin)
 # Этажи.
 class FloorInline(nested_admin.NestedStackedInline):
 	model = Floor
+	form = FloorForm
 	extra = 1
-	classes = ['collapse']
+	classes = ['collapse', 'floors']
 	fieldsets = (
 		('Этажи', {
 			# 'classes': ('collapse',),
@@ -69,10 +71,12 @@ class FloorInline(nested_admin.NestedStackedInline):
 # Квартиры.
 class ApartmentInline(nested_admin.NestedStackedInline):
 	model = Apartment
+	form = ApartmentForm
+	classes = ['apartmentsBlock']
 	extra = 1
 	fieldsets = (
 		('Показать/скрыть параметры квартиры', {
-			'classes': ('collapse',),
+			'classes': ('collapse', 'apartments',),
 			'fields': (
 				'name', ('rooms', 'price'), ('square', 'cost'),
 			),
@@ -84,6 +88,7 @@ class ApartmentInline(nested_admin.NestedStackedInline):
 # Дома.
 class HouseAdmin(nested_admin.NestedModelAdmin):
 	search_fields = ['name']
+	form = HouseForm
 
 	fieldsets = (
 		(None, {

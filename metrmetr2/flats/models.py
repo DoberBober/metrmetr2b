@@ -96,8 +96,8 @@ class Apartment(models.Model):
 	name = models.CharField(max_length=150, verbose_name="Название")
 	house = models.ForeignKey(House, related_name='apartment_house', null=True, on_delete=models.SET_NULL, verbose_name="ЖК")
 	rooms = models.IntegerField(verbose_name="Количество комнат")
-	price = models.IntegerField(verbose_name="Стоимость квадратного метра")
-	cost = models.IntegerField(verbose_name="Цена квартиры")
+	price = models.IntegerField(verbose_name="Минимальная стоимость квадратного метра")
+	cost = models.IntegerField(verbose_name="Минимальная цена квартиры")
 	square = models.IntegerField(verbose_name="Площадь")
 
 	def __str__(self):
