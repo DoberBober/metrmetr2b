@@ -64,6 +64,7 @@ class Stage(models.Model):
 
 # Дом.
 class House(models.Model):
+	author = models.ForeignKey('auth.User', related_name='house_author', blank=True, null=True, on_delete=models.SET_NULL, verbose_name="Владелец")
 	name = models.CharField(max_length=150, verbose_name="Название ЖК")
 	slug = models.SlugField(max_length=150, unique=True, blank=True)
 	district = models.ForeignKey(District, related_name='house_district', null=True, on_delete=models.SET_NULL, verbose_name="Район")

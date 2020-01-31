@@ -116,4 +116,15 @@ class HouseAdmin(nested_admin.NestedModelAdmin):
 	list_display = ['name', 'company', 'district', 'completion', 'stage']
 	inlines = [ApartmentInline]
 
+	def save_model(self, request, obj, form, change):
+		if not obj.author:
+			obj.author = request.user
+		super().save_model(request, obj, form, change)
+
+	def get_queryset(self, request):
+		qs = super(nested_admin.NestedModelAdmin, self).get_queryset(request)
+		if request.user.is_superuser:
+			return qs
+		return qs.filter(author=request.user)
+
 admin.site.register(House, HouseAdmin)
