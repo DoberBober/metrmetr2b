@@ -26,7 +26,7 @@ SESSION_COOKIE_AGE = 5*60*60
 SECRET_KEY = 'efdwh4jhbnj%z=xwei^)35(0k73(4v7wfh3f#aant@17e#i80y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -135,6 +135,3 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

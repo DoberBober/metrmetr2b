@@ -6,6 +6,9 @@
 /public
 /passenger_wsgi.py
 /tmp
+/.beget
+/.gitconfig
+/.viminfo
 
 # dependencies
 /node_modules
@@ -36,3 +39,4 @@ DB_config.py
 
 /__pycache__
 *.pyc
+/metrmetr2/static/
