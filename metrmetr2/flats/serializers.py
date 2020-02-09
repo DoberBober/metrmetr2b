@@ -38,7 +38,7 @@ class DistrictsFilterSerializers(serializers.ModelSerializer):
 		model = District
 		fields = ("id", "name")
 
-class HousesFilterSerializers(serializers.ModelSerializer):
+class CompaniesFilterSerializers(serializers.ModelSerializer):
 	class Meta:
-		model = House
+		model = Company
 		fields = ("id", "name")

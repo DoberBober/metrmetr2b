@@ -46,13 +46,13 @@ class FilterView(APIView):
 		stages_serialized = StagesFilterSerializers(stages, many=True).data
 		districts = District.objects.all()
 		districts_serialized = DistrictsFilterSerializers(districts, many=True).data
-		houses = House.objects.all()
-		houses_serialized = HousesFilterSerializers(houses, many=True).data
+		companies = Company.objects.all()
+		companies_serialized = CompaniesFilterSerializers(companies, many=True).data
 
 		return Response({
 			"maxPrice": maxPrice['cost__max'], 
 			"rooms": rooms_info, 
 			"stages": stages_serialized, 
 			"districts": districts_serialized, 
-			"houses": houses_serialized
+			"companies": companies_serialized
 		})
